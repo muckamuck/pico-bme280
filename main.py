@@ -225,6 +225,7 @@ if __name__ == '__main__':
             time.sleep(.05)
 
     onboard_sensor = ADC(4)
+    idx = 0
     while True:
         temperature, pressure, humidity = sensor.read_compensated_data()
         temperature = temperature / 100 * 9 / 5 + 32
@@ -232,8 +233,11 @@ if __name__ == '__main__':
         humidity = humidity / 1024
 
         display.fill(0)
-        display.text('Sensor Values:', 5, 5)
-        display.text('  temperature: {temperature:.2f} F', 5, 16)
-        display.text('     pressure: {pressure:.2f} inHg', 5, 26)
-        display.text('     humidity: {humidity:.2f} %', 5, 36)
+        display.text('Sensor Values', 5, 5)
+        display.text('  t: {t:.2f} F'.format(t=temperature), 5, 16)
+        display.text('  p: {p:.2f} inHg'.format(p=pressure), 5, 26)
+        display.text('  h: {h:.2f} %'.format(h=humidity), 5, 36)
+        display.text('idx: {i}'.format(i=idx), 5, 46)
+        idx += 1
+        display.show()
         time.sleep(1)
